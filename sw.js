@@ -44,6 +44,17 @@ self.addEventListener('fetch', (event) => {
 			})
 	);
 });
-// self.addEventListner('activate', (event) => {
-// 	const cacheWhiteList = ['img-v1']
-// })
+self.addEventListner('activate', (event) => {
+	const cacheWhiteList = ['img-cache-v1'];
+	event.waitUntil(
+		caches.keys().then((cacheNames) => {
+			return Promise.all(
+				cacheNames.map((cacheName) => {
+					if (cacheWhiteList.indexOf(cacheName) < 0) {
+						return caches.delete(cacheName);
+					}
+				})
+			);
+		})
+	);
+})
