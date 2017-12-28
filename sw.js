@@ -45,6 +45,7 @@ self.addEventListener('fetch', (event) => {
 	);
 });
 self.addEventListner('activate', (event) => {
+	console.log('activate');
 	const cacheWhiteList = ['img-cache-v1'];
 	event.waitUntil(
 		caches.keys().then((cacheNames) => {
